@@ -64,9 +64,9 @@ public class MainActivity extends AppCompatActivity {
                 // COMPLETED (1) Store ChildActivity.class in a Class object called destinationActivity
                 Class destinationActivity = ChildActivity.class;
                 // COMPLETED (2) Create an Intent to start ChildActivity
-                Intent intent = new Intent(MainActivity.this, destinationActivity);
+                Intent childActivityIntent = new Intent(context, destinationActivity);
                 // COMPLETED (3) Replace the Toast with code to start ChildActivity
-                startActivity(intent);
+                startActivity(childActivityIntent);
 
             }
         });
