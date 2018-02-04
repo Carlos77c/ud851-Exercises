@@ -32,9 +32,11 @@ import java.net.URL;
 
 public class MainActivity extends AppCompatActivity {
 
-    // TODO (1) Create a static final key to store the query's URL
+    // COMPLETED (1) Create a static final key to store the query's URL
+    private final static String QUERY_URL_KEY = "url_key";
 
-    // TODO (2) Create a static final key to store the search's raw JSON
+    // COMPLETED (2) Create a static final key to store the search's raw JSON
+    private final static String SEARCH_RESULTS_KEY = "s_results_key";
 
     private EditText mSearchBoxEditText;
 
@@ -50,16 +52,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mSearchBoxEditText = (EditText) findViewById(R.id.et_search_box);
+        mSearchBoxEditText = findViewById(R.id.et_search_box);
 
-        mUrlDisplayTextView = (TextView) findViewById(R.id.tv_url_display);
-        mSearchResultsTextView = (TextView) findViewById(R.id.tv_github_search_results_json);
+        mUrlDisplayTextView = findViewById(R.id.tv_url_display);
+        mSearchResultsTextView = findViewById(R.id.tv_github_search_results_json);
 
-        mErrorMessageDisplay = (TextView) findViewById(R.id.tv_error_message_display);
+        mErrorMessageDisplay = findViewById(R.id.tv_error_message_display);
 
-        mLoadingIndicator = (ProgressBar) findViewById(R.id.pb_loading_indicator);
+        mLoadingIndicator =  findViewById(R.id.pb_loading_indicator);
 
-        // TODO (9) If the savedInstanceState bundle is not null, set the text of the URL and search results TextView respectively
+        // COMPLETED (9) If the savedInstanceState bundle is not null, set the text of the URL and search results TextView respectively
+        if(savedInstanceState != null){
+            mUrlDisplayTextView.setText(savedInstanceState.getString(QUERY_URL_KEY, ""));
+            mSearchResultsTextView.setText(savedInstanceState.getString(SEARCH_RESULTS_KEY, ""));
+        }
     }
 
     /**
@@ -151,13 +157,20 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    // TODO (3) Override onSaveInstanceState to persist data across Activity recreation
-    // Do the following steps within onSaveInstanceState
-    // TODO (4) Make sure super.onSaveInstanceState is called before doing anything else
+    // COMPLETED (3) Override onSaveInstanceState to persist data across Activity recreation
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        // Do the following steps within onSaveInstanceState
+        // COMPLETED (4) Make sure super.onSaveInstanceState is called before doing anything else
+        super.onSaveInstanceState(outState);
+        // COMPLETED (5) Put the contents of the TextView that contains our URL into a variable
+        // COMPLETED (6) Using the key for the query URL, put the string in the outState Bundle
+        String textViewUrl = mUrlDisplayTextView.getText().toString();
+        outState.putString(QUERY_URL_KEY, textViewUrl);
+        // COMPLETED (7) Put the contents of the TextView that contains our raw JSON search results into a variable
+        // COMPLETED (8) Using the key for the raw JSON search results, put the search results into the outState Bundle
+        String textViewSearchResults = mSearchResultsTextView.getText().toString();
+        outState.putString(SEARCH_RESULTS_KEY, textViewSearchResults);
+    }
 
-    // TODO (5) Put the contents of the TextView that contains our URL into a variable
-    // TODO (6) Using the key for the query URL, put the string in the outState Bundle
-
-    // TODO (7) Put the contents of the TextView that contains our raw JSON search results into a variable
-    // TODO (8) Using the key for the raw JSON search results, put the search results into the outState Bundle
 }
