@@ -207,8 +207,7 @@ public class MainActivity extends AppCompatActivity implements
                 /* Parse the URL from the passed in String and perform the search */
                 try {
                     URL githubUrl = new URL(searchQueryUrlString);
-                    String githubSearchResults = NetworkUtils.getResponseFromHttpUrl(githubUrl);
-                    return githubSearchResults;
+                    return NetworkUtils.getResponseFromHttpUrl(githubUrl);
                 } catch (IOException e) {
                     e.printStackTrace();
                     return null;
