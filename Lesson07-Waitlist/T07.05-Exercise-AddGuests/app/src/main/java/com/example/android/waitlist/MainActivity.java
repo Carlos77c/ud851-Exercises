@@ -80,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         // COMPLETED (12) Make sure you surround the Integer.parseInt with a try catch and log any exception
         try {
             partySize = Integer.parseInt(mNewPartySizeEditText.getText().toString());
-        }catch (Exception e){
+        }catch (NumberFormatException e){
             e.printStackTrace();
         }
 
