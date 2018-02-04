@@ -95,7 +95,7 @@ public class TaskContentProvider extends ContentProvider {
             case TASKS:
                 long id = db.insert(TaskContract.TaskEntry.TABLE_NAME, null, values);
                 if(id > 0){
-                    returnUri = ContentUris.withAppendedId(uri, id);
+                    returnUri = ContentUris.withAppendedId(TaskContract.TaskEntry.CONTENT_URI, id);
                 }else{
                     throw new SQLException("Failed to insert row into " + uri);
                 }
